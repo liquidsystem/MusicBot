@@ -1,12 +1,13 @@
 [Credentials]
 ; The bot needs its own account to run on (not yours)
-Username = my@email
-Password = your_password
+Username = YOUREMAIL
+Password = PASSWORD
 
 [Permissions]
 ; This need to be your id, not the bot's id.  The bot does not own the bot.  You do.
-OwnerID = 000000000000000000
-
+; Multiple owners are added INSIDE of the brackets, with a comma in between each ID
+; Example: [117435590550618119, 117455355704901632, 104337249872654336]
+OwnerID = [000000000000000000]
 [Chat]
 ; Change this if you don't want commands to trigger another bot
 CommandPrefix = !

@@ -44,3 +44,6 @@ ECHO ERROR: No install of Python has been detected. Please review the README for
 
 :end
 PAUSE
+
+
+pause

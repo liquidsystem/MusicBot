@@ -367,7 +367,7 @@ class MusicBot(discord.Client):
         Asks the bot to join a server. [todo: add info about if it breaks or whatever]
         """
         try:
-            if message.author.id == self.config.owner_id:
+            if message.author.id in self.config.owner_id:
                 await self.accept_invite(server_link)
 
         except:
@@ -451,6 +451,9 @@ class MusicBot(discord.Client):
         Usage {command_prefix}summon
         This command is for summoning the bot into your voice channel [but it should do it automatically the first time]
         """
+        
+        if author.id not in self.config.owner_id:
+            return Response('You cannot control me peasant!', reply=True, delete_after=15)
         if self.voice_clients:
             raise CommandError("Multiple servers not supported at this time.")
 
@@ -583,6 +586,9 @@ class MusicBot(discord.Client):
         """
 
         player = await self.get_player(message.channel)
+        
+        if message.author.id not in self.config.owner_id:
+            return
 
         if not new_volume:
             return Response('Current volume: `%s%%`' % int(player.volume * 100), reply=True, delete_after=10)
@@ -697,11 +703,11 @@ class MusicBot(discord.Client):
             return
 
 
-        if int(message.author.id) in self.blacklist and message.author.id != self.config.owner_id:
+        if int(message.author.id) in self.blacklist and message.author.id not in self.config.owner_id:
             print("[Blacklisted] {0.id}/{0.name} ({1})".format(message.author, message_content))
             return
 
-        elif self.config.white_list_check and int(message.author.id) not in self.whitelist and message.author.id != self.config.owner_id:
+        elif self.config.white_list_check and int(message.author.id) not in self.whitelist and message.author.id not in self.config.owner_id:
             print("[Not whitelisted] {0.id}/{0.name} ({1})".format(message.author, message_content))
             return
 
